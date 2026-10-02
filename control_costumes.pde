@@ -1,26 +1,23 @@
+int control_table_x = 650;
 boolean editing;
 String name;
 
 void mouseReleased() {
-  if (mouseX > (const_first_x + const_num_x + const_name_x + const_status_x + const_reply_x * int(reply) + const_voltage_x + const_commands_x * int(commands) + const_ip_address_x * int(ip_address)) &&
-    mouseX < (const_first_x + const_num_x + const_name_x + const_status_x + const_reply_x * int(reply) + const_voltage_x + const_commands_x * int(commands) + const_ip_address_x * int(ip_address) + const_channels_x * int(channels) - 10) &&
-    mouseY > const_first_y &&
-    mouseY < const_first_y + ((costumes_to_list - 1) * 20)) {
+  if (mouseX > control_table_x &&
+    mouseX < control_table_x + 275 &&
+    mouseY > 15 &&
+    mouseY < 35 + ((c-1)*20)) {
     JSONArray index = ctrl.getJSONArray(costume_to_control);
     boolean is_reacting = index.getBoolean(channel_to_control);
     index.setBoolean(channel_to_control, !is_reacting);
 
     println( "Change channel for costume " +(costume_to_control+1)+ " channel " + channel_to_control);
     saveJSONArray(ctrl, "costumes.json");
-  } else if (mouseX > (const_first_x + const_num_x + const_name_x + const_status_x + const_reply_x * int(reply) + const_voltage_x + const_commands_x * int(commands) + const_ip_address_x * int(ip_address) + const_channels_x * int(channels)) &&
-    mouseY > const_first_y &&
-    mouseY < const_first_y + ((costumes_to_list - 1) * 20)) {
-    sendPacket(2, (costume_to_control+1), 0);
   }
 
-  if ((mouseX > const_first_x + const_num_x) && (mouseX < const_first_x + const_num_x + const_name_x)) {
+  if ((mouseX > 40) && (mouseX < 210)) {
     if (!editing) {
-      //      editing = true;
+//      editing = true;
       JSONArray index = ctrl.getJSONArray(costume_to_control);
       name = index.getString(0);
     }
